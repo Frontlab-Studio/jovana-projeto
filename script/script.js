@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 hasAnimated = true;
                 let currentScore = 0;
                 const targetScore = 99;
-                const duration = 1500; // 1.5 segundos
+                const duration = 1500;
                 const incrementTime = duration / targetScore;
 
                 const timer = setInterval(() => {
@@ -167,3 +167,24 @@ if (menuToggle && mobileMenu) {
         });
     });
 }
+// Função para preparar a galeria no Mobile (Nível 4)
+function setupMobileGallery() {
+    const isMobile = window.innerWidth <= 768;
+    const workItems = document.querySelectorAll('.work-item');
+
+    if (isMobile) {
+        workItems.forEach(item => {
+            const imgPath = item.getAttribute('data-img');
+            // Aplicamos a imagem de fundo mantendo o gradiente que definimos no CSS
+            item.style.backgroundImage = `linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%), url(${imgPath})`;
+        });
+    } else {
+        // Se voltar para o desktop (resize), removemos o estilo inline
+        workItems.forEach(item => {
+            item.style.backgroundImage = '';
+        });
+    }
+}
+
+window.addEventListener('load', setupMobileGallery);
+window.addEventListener('resize', setupMobileGallery);

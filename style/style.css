@@ -244,7 +244,7 @@ nav a {
 
 .bento-card.highlight {
     background: rgba(255, 255, 255, 0.08);
- 
+
 }
 
 .pagespeed-graph {
@@ -490,7 +490,6 @@ nav a {
 
 /* --- Navegação Mobile High-End --- */
 
-/* Oculta botão no Desktop */
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -505,7 +504,6 @@ nav a {
     height: 40px;
 }
 
-/* Linhas assimétricas para estética moderna */
 .menu-toggle .line {
     height: 2px;
     background-color: var(--cor-texto);
@@ -520,7 +518,6 @@ nav a {
     width: 16px;
 }
 
-/* Animação para transformar em "X" ao abrir */
 .menu-toggle.active .line:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
     width: 24px;
@@ -531,7 +528,6 @@ nav a {
     width: 24px;
 }
 
-/* Tela cheia com Glassmorphism */
 .mobile-menu-overlay {
     position: fixed;
     top: 0;
@@ -542,7 +538,6 @@ nav a {
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     z-index: 99;
-    /* Fica logo abaixo do header */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -574,7 +569,6 @@ nav a {
     transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* Revelação em cascata dos links */
 .mobile-menu-overlay.open .mobile-link {
     opacity: 1;
     transform: translateY(0);
@@ -605,27 +599,59 @@ nav a {
     gap: 0.5rem;
 }
 
-/* Regras de Swap Mobile/Desktop */
 @media (max-width: 768px) {
-    .desktop-nav {
-        display: none;
+
+    .cursor-image {
+        display: none !important;
     }
 
-    .menu-toggle {
-        display: flex;
+    .absolute-title {
+        top: 80px;
+    }
+
+    .horizontal-track {
+        margin-top: 15vh;
+    }
+
+    .work-item {
+        width: 85vw;
+        height: 55vh;
+        background-size: cover;
+        background-position: center;
+        border-radius: 16px;
+        overflow: hidden;
+        justify-content: flex-end;
+        align-items: flex-start;
+        padding: 30px;
+        position: relative;
+        background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 50%);
+    }
+
+    .work-item h2 {
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+        text-align: left;
+    }
+
+    .work-item span {
+        font-size: 0.9rem;
+        opacity: 0.8;
+        text-align: left;
     }
 }
+
+
 /* --- Assinatura Frontlab Studio (High-Tech Lead Magnet) --- */
 
 .frontlab-signature {
     position: relative;
-    font-family: monospace, sans-serif; /* Traz a estética de código puro */
+    font-family: monospace, sans-serif;
     font-size: 0.85rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--cor-texto);
-    opacity: 0.4; /* Mantém neutro e não rouba a cena da Jovana */
+    opacity: 0.4;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -633,7 +659,6 @@ nav a {
     transition: opacity 0.3s ease, color 0.3s ease;
 }
 
-/* Efeito de "Brackets" de código que surgem no hover */
 .frontlab-signature::before,
 .frontlab-signature::after {
     content: '';
@@ -641,23 +666,39 @@ nav a {
     color: var(--cor-destaque);
     transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.frontlab-signature::before { content: '['; transform: translateX(10px); }
-.frontlab-signature::after { content: ']'; transform: translateX(-10px); }
 
-/* Indicador de Servidor Online / Alta Performance */
+.frontlab-signature::before {
+    content: '[';
+    transform: translateX(10px);
+}
+
+.frontlab-signature::after {
+    content: ']';
+    transform: translateX(-10px);
+}
+
 .status-dot {
     width: 6px;
     height: 6px;
-    background-color: #00ff66; 
+    background-color: #00ff66;
     border-radius: 50%;
     box-shadow: 0 0 8px rgba(0, 255, 102, 0.5);
     animation: serverPulse 2s infinite;
 }
 
 @keyframes serverPulse {
-    0% { opacity: 0.4; }
-    50% { opacity: 1; box-shadow: 0 0 12px rgba(0, 255, 102, 0.8); }
-    100% { opacity: 0.4; }
+    0% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 12px rgba(0, 255, 102, 0.8);
+    }
+
+    100% {
+        opacity: 0.4;
+    }
 }
 
 .frontlab-signature:hover {
@@ -665,8 +706,9 @@ nav a {
     color: var(--cor-destaque);
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
+
 .frontlab-signature:hover::before,
 .frontlab-signature:hover::after {
     opacity: 1;
-    transform: translateX(0); 
+    transform: translateX(0);
 }
