@@ -47,48 +47,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const wrapper = document.querySelector('.horizontal-scroll-wrapper');
     const track = document.getElementById('horizontal-track');
 
-    window.addEventListener('scroll', () => {
-        const rect = wrapper.getBoundingClientRect();
-        if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
-            const scrollProgress = Math.abs(rect.top) / (rect.height - window.innerHeight);
-            const maxScroll = track.scrollWidth - window.innerWidth + (window.innerWidth * 0.1);
-            track.style.transform = `translateX(-${scrollProgress * maxScroll}px)`;
-        }
-    });
+    if (wrapper && track) {
+        window.addEventListener('scroll', () => {
+            const rect = wrapper.getBoundingClientRect();
+            if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
+                const scrollProgress = Math.abs(rect.top) / (rect.height - window.innerHeight);
+                const maxScroll = track.scrollWidth - window.innerWidth + (window.innerWidth * 0.1);
+                track.style.transform = `translateX(-${scrollProgress * maxScroll}px)`;
+            }
+        });
+    }
 
-    // 5. Floating Image (Showcase Hover)
-    const cursorImage = document.getElementById('cursor-image');
+    // 5. Setup Gallery Backgrounds (À Prova de Falhas)
     const workItems = document.querySelectorAll('.work-item');
 
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
-
-    window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    function animateCursor() {
-        cursorX += (mouseX - cursorX) * 0.1;
-        cursorY += (mouseY - cursorY) * 0.1;
-
-        cursorImage.style.left = `${cursorX}px`;
-        cursorImage.style.top = `${cursorY}px`;
-
-        requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-
     workItems.forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            const imgSrc = item.getAttribute('data-img');
-            cursorImage.style.backgroundImage = `url(${imgSrc})`;
-            cursorImage.classList.add('active');
-        });
+        const imgPath = item.getAttribute('data-img');
 
-        item.addEventListener('mouseleave', () => {
-            cursorImage.classList.remove('active');
-        });
+        if (imgPath) {
+            // O JS injeta o gradiente escuro e a imagem na mesma linha
+            item.style.backgroundImage = `linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0) 70%), url('${imgPath}')`;
+        }
     });
 
     // 6. 3D Hover Effect on Bento Cards
@@ -113,35 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 7. PageSpeed Counter Animation (O Trunfo da Agência)
-    const speedScore = document.getElementById('pagespeed-score');
-    let hasAnimated = false;
-
-    const speedObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !hasAnimated) {
-                hasAnimated = true;
-                let currentScore = 0;
-                const targetScore = 99;
-                const duration = 1500;
-                const incrementTime = duration / targetScore;
-
-                const timer = setInterval(() => {
-                    currentScore += 1;
-                    speedScore.innerText = currentScore;
-                    if (currentScore >= targetScore) {
-                        clearInterval(timer);
-                        speedScore.innerText = targetScore;
-                    }
-                }, incrementTime);
-
-                speedObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    speedObserver.observe(speedScore);
-// 8. Mobile Menu Logic (High-End Toggle) - AGORA PROTEGIDO
+    // 7. Mobile Menu Logic
     const menuToggle = document.querySelector('.menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileLinks = document.querySelectorAll('.mobile-link');
@@ -166,27 +117,5 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-
-    // 9. Setup Mobile Gallery (Nível 4)
-    function setupMobileGallery() {
-        const isMobile = window.innerWidth <= 768;
-        const workItems = document.querySelectorAll('.work-item');
-
-        if (isMobile) {
-            workItems.forEach(item => {
-                const imgPath = item.getAttribute('data-img');
-                item.style.backgroundImage = `linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%), url(${imgPath})`;
-            });
-        } else {
-            workItems.forEach(item => {
-                item.style.backgroundImage = '';
-            });
-        }
-    }
-
-    // Chama no load inicial
-    setupMobileGallery();
-    // Atualiza no resize
-    window.addEventListener('resize', setupMobileGallery);
 
 });
