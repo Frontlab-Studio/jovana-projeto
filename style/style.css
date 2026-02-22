@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-/* 1. BASE OBRIGATÓRIA (CSS GLOBAL) */
+
 :root {
     --cor-fundo: #050505;
     --cor-texto: #f4f4f5;
@@ -474,6 +474,15 @@ nav a {
         gap: 1rem;
         text-align: center;
     }
+
+    .desktop-nav {
+        display: none;
+    }
+
+
+    .menu-toggle {
+        display: flex;
+    }
 }
 
 /* Utilities */
@@ -601,44 +610,54 @@ nav a {
 
 @media (max-width: 768px) {
 
-    .cursor-image {
-        display: none !important;
+    .desktop-nav {
+        display: none;
     }
 
-    .absolute-title {
-        top: 80px;
-    }
 
-    .horizontal-track {
-        margin-top: 15vh;
-    }
-
-    .work-item {
-        width: 85vw;
-        height: 55vh;
-        background-size: cover;
-        background-position: center;
-        border-radius: 16px;
-        overflow: hidden;
-        justify-content: flex-end;
-        align-items: flex-start;
-        padding: 30px;
-        position: relative;
-        background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 50%);
-    }
-
-    .work-item h2 {
-        font-size: 1.5rem;
-        margin-bottom: 5px;
-        text-align: left;
-    }
-
-    .work-item span {
-        font-size: 0.9rem;
-        opacity: 0.8;
-        text-align: left;
+    .menu-toggle {
+        display: flex;
     }
 }
+
+.cursor-image {
+    display: none !important;
+}
+
+.absolute-title {
+    top: 80px;
+}
+
+.horizontal-track {
+    margin-top: 15vh;
+}
+
+.work-item {
+    width: 85vw;
+    height: 55vh;
+    background-size: cover;
+    background-position: center;
+    border-radius: 16px;
+    overflow: hidden;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 30px;
+    position: relative;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 50%);
+}
+
+.work-item h2 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.work-item span {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    text-align: left;
+}
+
 
 
 /* --- Assinatura Frontlab Studio (High-Tech Lead Magnet) --- */

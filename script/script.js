@@ -141,50 +141,52 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.5 });
 
     speedObserver.observe(speedScore);
-});
-// 8. Mobile Menu Logic (High-End Toggle)
-const menuToggle = document.querySelector('.menu-toggle');
-const mobileMenu = document.getElementById('mobile-menu');
-const mobileLinks = document.querySelectorAll('.mobile-link');
+// 8. Mobile Menu Logic (High-End Toggle) - AGORA PROTEGIDO
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
 
-if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener('click', () => {
-        menuToggle.classList.toggle('active');
-        mobileMenu.classList.toggle('open');
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
 
-        if (mobileMenu.classList.contains('open')) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
-    });
-
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            menuToggle.classList.remove('active');
-            mobileMenu.classList.remove('open');
-            document.body.style.overflow = '';
+            if (mobileMenu.classList.contains('open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
         });
-    });
-}
-// Função para preparar a galeria no Mobile (Nível 4)
-function setupMobileGallery() {
-    const isMobile = window.innerWidth <= 768;
-    const workItems = document.querySelectorAll('.work-item');
 
-    if (isMobile) {
-        workItems.forEach(item => {
-            const imgPath = item.getAttribute('data-img');
-            // Aplicamos a imagem de fundo mantendo o gradiente que definimos no CSS
-            item.style.backgroundImage = `linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%), url(${imgPath})`;
-        });
-    } else {
-        // Se voltar para o desktop (resize), removemos o estilo inline
-        workItems.forEach(item => {
-            item.style.backgroundImage = '';
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            });
         });
     }
-}
 
-window.addEventListener('load', setupMobileGallery);
-window.addEventListener('resize', setupMobileGallery);
+    // 9. Setup Mobile Gallery (Nível 4)
+    function setupMobileGallery() {
+        const isMobile = window.innerWidth <= 768;
+        const workItems = document.querySelectorAll('.work-item');
+
+        if (isMobile) {
+            workItems.forEach(item => {
+                const imgPath = item.getAttribute('data-img');
+                item.style.backgroundImage = `linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%), url(${imgPath})`;
+            });
+        } else {
+            workItems.forEach(item => {
+                item.style.backgroundImage = '';
+            });
+        }
+    }
+
+    // Chama no load inicial
+    setupMobileGallery();
+    // Atualiza no resize
+    window.addEventListener('resize', setupMobileGallery);
+
+});
