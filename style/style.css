@@ -1,17 +1,34 @@
 @charset "UTF-8";
 
+/* Importação da Montserrat (Textos e Leituras) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap');
+
+/* Mapeamento da Magic Retro (Títulos de Impacto) */
+@font-face {
+    font-family: 'Magic Retro';
+    src: url('../fonts/MagicRetro.woff2') format('woff2'),
+        url('../fonts/MagicRetro.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     --cor-fundo: #050505;
     --cor-texto: #f4f4f5;
     --cor-destaque: #ffffff;
     --cor-border: rgba(255, 255, 255, 0.1);
-    --fonte-padrao: 'Helvetica Neue', Inter, sans-serif;
+
+    /* Variáveis de Tipografia */
+    --fonte-padrao: 'Montserrat', sans-serif;
+    --fonte-titulo: 'Magic Retro', cursive, sans-serif;
 
     /* Clamp Typography */
     --font-giant: clamp(3rem, 10vw, 12rem);
     --font-h2: clamp(2rem, 5vw, 4rem);
 }
 
+/* Reset Obrigatório Frontlab Studio */
 *,
 *::before,
 *::after {
@@ -32,6 +49,18 @@ body {
     color: var(--cor-texto);
     line-height: 1.6;
     position: relative;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Aplicação da Fonte de Títulos */
+h1,
+h2,
+h3,
+.giant-text,
+.footer-title,
+.logo-link {
+    font-family: var(--fonte-titulo);
+    font-weight: normal;
 }
 
 img {
@@ -44,6 +73,30 @@ a {
     text-decoration: none;
     color: inherit;
     transition: 0.3s;
+}
+
+/* --- Utilities & SEO --- */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.reveal-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-up.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* --- Preloader --- */
@@ -83,7 +136,7 @@ a {
     position: relative;
     z-index: 10;
     font-size: 2rem;
-    font-weight: 200;
+    font-family: var(--fonte-titulo);
     mix-blend-mode: difference;
     transition: opacity 0.5s;
 }
@@ -136,9 +189,10 @@ nav a {
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-family: var(--fonte-padrao);
 }
 
-/* --- Hero Section --- */
+/* --- Hero Section (Imagem) --- */
 .hero {
     min-height: 100dvh;
     display: flex;
@@ -146,60 +200,19 @@ nav a {
     justify-content: center;
     position: relative;
     overflow: hidden;
+    background-color: var(--cor-fundo);
 }
 
-.mesh-bg {
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at 50% 50%, rgba(30, 30, 30, 0.8), transparent 60%);
-    animation: rotateGradient 20s linear infinite;
-    z-index: 1;
+.hero-image {
+    width: 100%;
+    height: 100dvh;
+    object-fit: cover;
+    object-position: top center; 
+    display: block;
+
 }
 
-@keyframes rotateGradient {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-}
-
-.giant-text {
-    font-size: var(--font-giant);
-    font-weight: 900;
-    text-transform: uppercase;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
-    position: relative;
-    line-height: 1;
-    transition: all 0.5s ease;
-}
-
-.giant-text:hover {
-    color: var(--cor-destaque);
-    -webkit-text-stroke: 0px transparent;
-}
-
-.subtitle {
-    margin-top: 1rem;
-    font-size: 1rem;
-    letter-spacing: 3px;
-    opacity: 0.6;
-    text-transform: uppercase;
-}
-
-/* --- Bento Grid --- */
+/* --- Bento Grid (Especialidades) --- */
 .bento-section {
     padding: 10vh 5%;
 }
@@ -207,11 +220,12 @@ nav a {
 .section-title {
     font-size: var(--font-h2);
     margin-bottom: 3rem;
-    font-weight: 300;
+    text-align: center;
 }
 
 .bento-grid {
     display: grid;
+    /* Grid seguro Mobile-First */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
 }
@@ -232,134 +246,15 @@ nav a {
 .bento-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    font-weight: 400;
 }
 
 .bento-card p {
     opacity: 0.7;
+    font-size: 0.95rem;
 }
 
 .bento-card.highlight {
     background: rgba(255, 255, 255, 0.08);
-}
-
-/* --- Horizontal Scroll (Portfólio) --- */
-.horizontal-scroll-wrapper {
-    height: 300vh;
-    position: relative;
-}
-
-.horizontal-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-}
-
-.absolute-title {
-    position: absolute;
-    top: 100px;
-    left: 5%;
-    z-index: 10;
-}
-
-.horizontal-track {
-    display: flex;
-    gap: 5vw;
-    padding: 0 5vw;
-    width: max-content;
-    will-change: transform;
-    margin-top: 15vh;
-}
-
-/* Projetos - Estilo Fixo/Blindado */
-.work-item {
-    width: 60vw;
-    max-width: 600px;
-    height: 50vh;
-    border: 1px solid var(--cor-border);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-    padding: 40px;
-    border-radius: 16px;
-    overflow: hidden;
-    position: relative;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
-    cursor: pointer;
-}
-
-.work-item:hover {
-    transform: scale(1.02);
-    border-color: var(--cor-destaque);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
-}
-
-.work-item h2 {
-    font-size: 2rem;
-    margin-bottom: 5px;
-    text-align: left;
-    color: #ffffff;
-    z-index: 2;
-}
-
-.work-item span {
-    font-size: 1rem;
-    opacity: 0.8;
-    text-align: left;
-    color: #cccccc;
-    z-index: 2;
-}
-
-@media (max-width: 768px) {
-    .absolute-title {
-        top: 50px;
-    }
-
-    .horizontal-track {
-        margin-top: 10vh;
-    }
-
-    .work-item {
-        width: 85vw;
-        height: 55vh;
-        padding: 30px;
-    }
-
-    .work-item h2 {
-        font-size: 1.5rem;
-    }
-}
-
-/* --- Process Storytelling --- */
-.process-section {
-    padding: 15vh 5%;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.process-step {
-    padding: 3rem 0;
-    border-top: 1px solid var(--cor-border);
-    opacity: 0.3;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    transform: translateX(-20px);
-}
-
-.process-step.active-step {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.process-step h3 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
 }
 
 /* --- Footer Monumental --- */
@@ -377,11 +272,10 @@ nav a {
 }
 
 .footer-title {
-    font-size: clamp(4rem, 12vw, 15rem);
-    font-weight: 900;
+    font-size: clamp(3rem, 10vw, 10rem);
     line-height: 0.8;
-    letter-spacing: -2px;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .footer-links-grid {
@@ -452,19 +346,7 @@ nav a {
     letter-spacing: 1px;
 }
 
-/* Utilities */
-.reveal-up {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.reveal-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* --- Navegação Mobile High-End --- */
+/* --- Navegação Mobile --- */
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -537,8 +419,7 @@ nav a {
 .mobile-link {
     font-size: clamp(2rem, 8vw, 3rem);
     text-transform: uppercase;
-    font-weight: 300;
-    letter-spacing: 2px;
+    font-family: var(--fonte-titulo);
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.4s ease, transform 0.4s ease;
@@ -600,7 +481,6 @@ nav a {
     letter-spacing: 1px;
     color: var(--cor-texto);
     opacity: 0.4;
-    text-decoration: none;
     display: inline-flex;
     align-items: center;
     gap: 8px;
