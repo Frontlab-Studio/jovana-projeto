@@ -1,9 +1,7 @@
 @charset "UTF-8";
 
-/* Importação da Montserrat (Textos e Leituras) */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap');
 
-/* Mapeamento da Magic Retro (Títulos de Impacto) */
 @font-face {
     font-family: 'Magic Retro';
     src: url('../fonts/MagicRetro.woff2') format('woff2'),
@@ -19,16 +17,13 @@
     --cor-destaque: #ffffff;
     --cor-border: rgba(255, 255, 255, 0.1);
 
-    /* Variáveis de Tipografia */
     --fonte-padrao: 'Montserrat', sans-serif;
     --fonte-titulo: 'Magic Retro', cursive, sans-serif;
 
-    /* Clamp Typography */
     --font-giant: clamp(3rem, 10vw, 12rem);
     --font-h2: clamp(2rem, 5vw, 4rem);
 }
 
-/* Reset Obrigatório Frontlab Studio */
 *,
 *::before,
 *::after {
@@ -52,7 +47,6 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Aplicação da Fonte de Títulos */
 h1,
 h2,
 h3,
@@ -75,7 +69,7 @@ a {
     transition: 0.3s;
 }
 
-/* --- Utilities & SEO --- */
+/* Utilities */
 .sr-only {
     position: absolute;
     width: 1px;
@@ -99,7 +93,7 @@ a {
     transform: translateY(0);
 }
 
-/* --- Preloader --- */
+/* Preloader */
 .preloader {
     position: fixed;
     top: 0;
@@ -150,7 +144,7 @@ body.loaded .counter-wrap {
     opacity: 0;
 }
 
-/* --- Header & Logo --- */
+/* Header */
 .glass-nav {
     position: fixed;
     top: 0;
@@ -192,7 +186,7 @@ nav a {
     font-family: var(--fonte-padrao);
 }
 
-/* --- Hero Section (Imagem) --- */
+/* Hero */
 .hero {
     min-height: 100dvh;
     display: flex;
@@ -207,12 +201,11 @@ nav a {
     width: 100%;
     height: 100dvh;
     object-fit: cover;
-    object-position: top center; 
+    object-position: top center;
     display: block;
-
 }
 
-/* --- Bento Grid (Especialidades) --- */
+/* Bento Grid */
 .bento-section {
     padding: 10vh 5%;
 }
@@ -225,7 +218,6 @@ nav a {
 
 .bento-grid {
     display: grid;
-    /* Grid seguro Mobile-First */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
 }
@@ -246,6 +238,7 @@ nav a {
 .bento-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
+    font-family: var(--fonte-titulo);
 }
 
 .bento-card p {
@@ -257,7 +250,102 @@ nav a {
     background: rgba(255, 255, 255, 0.08);
 }
 
-/* --- Footer Monumental --- */
+/* Horizontal Scroll (Restaurado) */
+.horizontal-scroll-wrapper {
+    height: 300vh;
+    /* Permite rolar para baixo enquanto o conteúdo move para o lado */
+    position: relative;
+}
+
+.horizontal-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.absolute-title {
+    position: absolute;
+    top: 100px;
+    left: 5%;
+    z-index: 10;
+    text-align: left;
+}
+
+.horizontal-track {
+    display: flex;
+    gap: 5vw;
+    padding: 0 5vw;
+    width: max-content;
+    will-change: transform;
+    margin-top: 15vh;
+}
+
+.work-item {
+    width: 60vw;
+    max-width: 600px;
+    height: 50vh;
+    border: 1px solid var(--cor-border);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 40px;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+}
+
+.work-item:hover {
+    transform: scale(1.02);
+    border-color: var(--cor-destaque);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+}
+
+.work-item h2 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+    text-align: left;
+    color: #ffffff;
+    z-index: 2;
+}
+
+.work-item span {
+    font-size: 1rem;
+    opacity: 0.8;
+    text-align: left;
+    color: #cccccc;
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .absolute-title {
+        top: 50px;
+    }
+
+    .horizontal-track {
+        margin-top: 10vh;
+    }
+
+    .work-item {
+        width: 85vw;
+        height: 55vh;
+        padding: 30px;
+    }
+
+    .work-item h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Footer */
 .monumental-footer {
     padding: 10vh 5% 2rem 5%;
     border-top: 1px solid var(--cor-border);
@@ -346,7 +434,7 @@ nav a {
     letter-spacing: 1px;
 }
 
-/* --- Navegação Mobile --- */
+/* Mobile Menu */
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -471,7 +559,7 @@ nav a {
     }
 }
 
-/* --- Assinatura Frontlab Studio --- */
+/* Frontlab Signature */
 .frontlab-signature {
     position: relative;
     font-family: monospace, sans-serif;
