@@ -69,7 +69,6 @@ a {
     transition: 0.3s;
 }
 
-/* Utilities */
 .sr-only {
     position: absolute;
     width: 1px;
@@ -93,7 +92,6 @@ a {
     transform: translateY(0);
 }
 
-/* Preloader */
 .preloader {
     position: fixed;
     top: 0;
@@ -144,7 +142,6 @@ body.loaded .counter-wrap {
     opacity: 0;
 }
 
-/* Header */
 .glass-nav {
     position: fixed;
     top: 0;
@@ -186,18 +183,6 @@ nav a {
     font-family: var(--fonte-padrao);
 }
 
-/* Hero */
-.hero {
-    min-height: 100dvh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    background-color: var(--cor-fundo);
-}
-
-
 .hero {
     min-height: 100dvh;
     display: flex;
@@ -218,8 +203,6 @@ nav a {
     z-index: 2;
 }
 
-
-/* Bento Grid */
 .bento-section {
     padding: 10vh 5%;
 }
@@ -230,44 +213,76 @@ nav a {
     text-align: center;
 }
 
+
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+    gap: 3.5rem 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 0;
 }
 
-.bento-card {
+a.bento-card {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--cor-border);
     border-radius: 24px;
     padding: 2.5rem;
+    min-height: 300px;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    min-height: 300px;
-    transition: transform 0.1s;
-    transform-style: preserve-3d;
+    justify-content: space-between;
+    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-.bento-card h3 {
+
+a.bento-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     font-family: var(--fonte-titulo);
 }
 
-.bento-card p {
+a.bento-card p {
     opacity: 0.7;
     font-size: 0.95rem;
 }
 
-.bento-card.highlight {
-    background: rgba(255, 255, 255, 0.08);
+a.bento-card .card-action {
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--cor-destaque);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.5;
+    transition: opacity 0.4s ease;
 }
 
-/* Horizontal Scroll (Restaurado) */
+@media (hover: hover) {
+    a.bento-card:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.05);
+    }
+
+    a.bento-card:hover .card-action {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    a.bento-card .card-action {
+        opacity: 1;
+        color: rgba(255, 255, 255, 0.6);
+    }
+}
+
 .horizontal-scroll-wrapper {
     height: 300vh;
-    /* Permite rolar para baixo enquanto o conteúdo move para o lado */
     position: relative;
 }
 
@@ -359,7 +374,6 @@ nav a {
     }
 }
 
-/* Footer */
 .monumental-footer {
     padding: 10vh 5% 2rem 5%;
     border-top: 1px solid var(--cor-border);
@@ -449,7 +463,6 @@ nav a {
     letter-spacing: 1px;
 }
 
-/* Mobile Menu */
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -558,23 +571,6 @@ nav a {
     gap: 0.5rem;
 }
 
-@media (max-width: 768px) {
-    .desktop-nav {
-        display: none;
-    }
-
-    .menu-toggle {
-        display: flex;
-    }
-
-    .footer-bottom {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
-}
-
-/* Frontlab Signature */
 .frontlab-signature {
     position: relative;
     font-family: monospace, sans-serif;
@@ -642,17 +638,30 @@ nav a {
 .frontlab-signature:hover::after {
     opacity: 1;
     transform: translateX(0);
-}/* --- Ajuste de Proporção para Mobile --- */
+}
+
 @media (max-width: 768px) {
     .hero {
-        /* Remove o espaço vazio gigante em volta do banner encolhido */
-        min-height: 70dvh; 
+        min-height: 70dvh;
         padding: 0 5%;
     }
 
     .hero-banner {
         width: 100%;
-        /* Um leve zoom para forçar a leitura do texto, aceitando que as pontas mais extremas podem ficar perto da borda */
-        transform: scale(1.1); 
+        transform: scale(1.1);
+    }
+
+    .desktop-nav {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
     }
 }
